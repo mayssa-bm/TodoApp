@@ -15,8 +15,8 @@ jobs:
     strategy:
  
       matrix:
-        platform: [ubuntu-latest,macos-latest,windows-latest]
-        python-version: [3.7, 3.8, 3.9]
+        platform: [ubuntu-latest]
+        python-version: [3.7]
     runs-on: ${{ matrix.platform }}
     steps:
     - uses: actions/checkout@v2
@@ -32,3 +32,13 @@ jobs:
     - name: Test with pytest
       run: |
         pytest test.py
+    - name: check docker installation
+      run: docker run hello-world
+    - name: push to docker hub
+      uses: docker/build-push-action@v2.6.1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME}}
+        password: ${{ secrets.DOCKER_PASSWORD}}
+        repository: docker push maissa47/todo_app
+        tag_with_ref: true
+    
