@@ -49,6 +49,6 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.USERNAME }}/todo_app:latest
+          tags: ${{ secrets.DOCKER_USERNAME}}/todo_app
  
  
