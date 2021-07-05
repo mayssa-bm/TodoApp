@@ -43,5 +43,5 @@ jobs:
     - name: check docker installation
       run: docker run hello-world
     - name: Docker push
-      run: docker push
+      run: docker push maissa47/todo_app
  
