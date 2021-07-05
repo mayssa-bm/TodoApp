@@ -42,8 +42,6 @@ jobs:
         
     - name: check docker installation
       run: docker run hello-world
-    - name: Docker Build, Tag & Push
-      uses: belon/docker-build-push@v4.0
-      with:
-        image: todoApp
-        registry: maissa47/todo_app
+    - name: Docker push
+      run: docker push
+ 
