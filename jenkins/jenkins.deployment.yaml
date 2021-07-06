@@ -2,36 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jenkins
-  labels:
-    app: flask
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: flask
-  replicas: 1
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+      app: jenkins
   template:
     metadata:
       labels:
-        app: flask
+        app: jenkins
     spec:
-      serviceAccountName: jenkins
       containers:
       - name: jenkins
-        image: maissa47/todo_app
-        imagePullPolicy: IfNotPresent
+        image: jenkins/jenkins:lts-jdk11
         ports:
         - containerPort: 8080
-          protocol: TCP
-      restartPolicy: Always
-      securityContext:
-        runAsUser: 0
-      terminationGracePeriodSeconds: 30
+        volumeMounts:
+        - name: jenkins-home
+          mountPath: /var/jenkins_home
       volumes:
-      - name: jenkins
-        persistentVolumeClaim:
-          claimName: jenkins-claim
+      - name: jenkins-home
+        emptyDir: { }
