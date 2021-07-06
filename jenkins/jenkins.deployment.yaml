@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: jenkins
+        app: flask
     spec:
       serviceAccountName: jenkins
       containers:
